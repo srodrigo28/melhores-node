@@ -19,8 +19,10 @@ server.use(restify.plugins.acceptParser(server.acceptable))
 server.use(restify.plugins.queryParser())
 server.use(restify.plugins.bodyParser())
 
-server.get('/echo/:nome', function (req, res, next) {
-    res.send(req.params)
+server.get('/', function (req, res, next) {
+    knex('rest').then((dados) => {
+            res.send(dados)
+    }, next)
     return next()
 })
 
