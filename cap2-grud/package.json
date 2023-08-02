@@ -1,0 +1,17 @@
+{
+  "name": "cap2-grud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^1.14.11",
+    "restify": "^6.3.4",
+    "restify-errors": "^5.0.0"
+  }
+}
