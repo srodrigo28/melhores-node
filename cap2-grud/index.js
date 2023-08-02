@@ -59,6 +59,17 @@ server.put('/update/:id', function (req, res, next) {
         }, next)
 })
 
+server.del('/delete/:id', function (req, res, next) {
+    const { id } = req.params
+    knex('rest')
+        .where('id', id)
+        .delete()
+        .then((dados) => {
+            if (!dados) return res.send(new errs.BadRequestError('Registo não encontrado'))
+            res.send('Dados Exluidos')
+        }, next)
+})
+
 server.listen(3000, function () {
     console.log('%s listening at %s', server.name, server.url)
 })
