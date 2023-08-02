@@ -5,6 +5,16 @@ const server = restify.createServer({
     version: '1.0.0'
 })
 
+const knex = require('knex')({
+    client: 'mysql',
+    connection: {
+        host: 'localhost',
+        user: 'root',
+        password: '',
+        database: 'db'
+    }
+})
+
 server.use(restify.plugins.acceptParser(server.acceptable))
 server.use(restify.plugins.queryParser())
 server.use(restify.plugins.bodyParser())

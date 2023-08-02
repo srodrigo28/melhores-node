@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "knex": "^0.14.2",
+    "mysql": "^2.15.0",
     "nodemon": "^1.14.11",
     "restify": "^6.3.4",
     "restify-errors": "^5.0.0"
