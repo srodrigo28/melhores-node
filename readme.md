@@ -8,3 +8,13 @@ https://www.udemy.com/course/aplicacoes-web-na-pratica-javascript-nodejs/learn/l
 
 ### Detalhe do treinamento
 Node versão 8
+
+### Atualizando versões bibliotecas node
+* Isso atualizará as dependências para as versões mais recentes (incluindo alterações de versão principais) no package.json arquivo. Se quisermos continuar com as atualizações, precisamos executar o seguinte comando:
+```
+npx npm-check-updates -u
+```
+
+```
+npx i
+```

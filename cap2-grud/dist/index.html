@@ -50,7 +50,7 @@
 
     </style>
 
-    <script defer>
+    <script>
         window.onload = () => {
             const lista = document.querySelector('#lista')
             const botao = document.querySelector('#botao')
@@ -62,12 +62,11 @@
 
             read()
         }
-
         function templateLi(id, name, element = true){
             return `${element ?  `<li class="list-group-item">` : '' }
                     ${name}
                     <i class="btn btn-danger  delete fa fa-trash"  data-id="${id}"> </i>
-                    <i class="btn btn-primary update fa fa-wrench" data-id="${id}"> </i>
+                    <i class="btn btn-primary update fa fa-wrench" data-id="${id}" data-name${name}> </i>
                     `
         }
         function read(){
@@ -75,7 +74,7 @@
 
             axios.get('/show')
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     response.data.forEach(element => {
                         // lista.innerHTML += `<li class="list-group-item">${element.name}</li>`
                         lista.innerHTML += templateLi(element.id, element.name)
@@ -95,7 +94,8 @@
                     console.log(error)
                 })
         }
-        function edit(element){
+        function edit(element, templateLi){
+            console.log(element)
             if(element.target.classList.contains('update')){
                 const input = document.createElement('input')
                 input.type = 'text'
