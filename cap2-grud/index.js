@@ -48,6 +48,17 @@ server.post('/create', function (req, res, next) {
 
 })
 
+server.put('/update/:id', function (req, res, next) {
+    const { id } = req.params
+    knex('rest')
+        .where('id', id)
+        .update(req.body)
+        .then((dados) => {
+            if (!dados) return res.send(new errs.BadRequestError('Registo não encontrado'))
+            res.send('Dados atualizados')
+        }, next)
+})
+
 server.listen(3000, function () {
     console.log('%s listening at %s', server.name, server.url)
 })
