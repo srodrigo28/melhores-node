@@ -6,3 +6,5 @@
 * Projeto com gráficos
 https://www.udemy.com/course/aplicacoes-web-na-pratica-javascript-nodejs/learn/lecture/9844952#overview
 
+### Detalhe do treinamento
+Node versão 8
