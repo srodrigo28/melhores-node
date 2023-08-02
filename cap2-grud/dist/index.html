@@ -54,6 +54,10 @@
 
             read()
         }
+
+        function templateLi(id, name){
+            return `<li class="list-group-item">${name}</li>`
+        }
         function read(){
             lista.innerHTML = ''
 
@@ -61,7 +65,8 @@
                 .then((response) => {
                     console.log(response)
                     response.data.forEach(element => {
-                        lista.innerHTML += `<li class="list-group-item">${element.name}</li>`
+                        // lista.innerHTML += `<li class="list-group-item">${element.name}</li>`
+                        lista.innerHTML += templateLi(element.id, element.name)
                     });
                 })
                 .catch((error) => {
@@ -73,7 +78,6 @@
             axios.post('/create', {name})
                 .then(function (response) {
                     console.log(response)
-                    read()
                 })
                 .catch(function(error){
                     console.log(error)
