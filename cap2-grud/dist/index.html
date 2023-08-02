@@ -41,6 +41,12 @@
             margin-left: 10px;
             width: 120px;
         }
+        .btn-danger{
+            width: 50px;
+        }
+        li i{
+            float: right;
+        }
 
     </style>
 
@@ -51,12 +57,17 @@
             const texto = document.querySelector('#texto')
 
             botao.addEventListener('click', create)
+            lista.addEventListener('click', del)
 
             read()
         }
 
         function templateLi(id, name){
-            return `<li class="list-group-item">${name}</li>`
+            return `<li class="list-group-item">
+                ${name}
+                
+                <i class="btn btn-danger delete fa fa-trash" data-id="${id}"> </i>
+                `
         }
         function read(){
             lista.innerHTML = ''
@@ -77,7 +88,7 @@
             const name = texto.value
             axios.post('/create', {name})
                 .then(function (response) {
-                    console.log(response)
+                    lista.innerHTML += templateLi(response.data[0], name)
                 })
                 .catch(function(error){
                     console.log(error)
@@ -86,8 +97,22 @@
         function edit(){
 
         }
-        function del(){
+        function del(element){
+            // console.log(element)
+            if(element.target.classList.contains('delete')){
+                const id = element.target.dataset.id
+                // console.log(id)
 
+                axios.delete(`/delete/${id}`)
+                .then(function(response) {
+                    if(response.status == 200) {
+                        lista.removeChild(element.path[1])
+                    }
+                })
+                .catch(function(error){
+                    console.log(error)
+                })
+            }
         }
     </script>
 </body>
