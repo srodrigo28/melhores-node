@@ -1,4 +1,5 @@
 var restify = require('restify')
+var errs = require('restify-errors')
 
 const server = restify.createServer({
     name: 'myapp',
@@ -23,6 +24,18 @@ server.get('/', function (req, res, next) {
     knex('rest').then((dados) => {
             res.send(dados)
     }, next)
+    return next()
+})
+
+server.get('/show/:id', function (req, res, next) {
+    const { id } = req.params
+    knex('rest')
+        .where('id', id)
+        .first()
+        .then((dados) => {
+            if (!dados) return res.send(new errs.BadRequestError('Registo não encontrado'))
+            res.send(dados)
+        }, next)
     return next()
 })
 
