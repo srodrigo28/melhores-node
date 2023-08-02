@@ -63,8 +63,8 @@
             read()
         }
 
-        function templateLi(id, name){
-            return `<li class="list-group-item">
+        function templateLi(id, name, element = true){
+            return `${element ?  `<li class="list-group-item">` : '' }
                     ${name}
                     <i class="btn btn-danger  delete fa fa-trash"  data-id="${id}"> </i>
                     <i class="btn btn-primary update fa fa-wrench" data-id="${id}"> </i>
@@ -106,7 +106,24 @@
 
                 pai.innerHTML = ''
                 pai.appendChild(input)
+                input.addEventListener('keydown', update.bind(pai, id, input))
+                input.focus()
             }
+        }
+        function update(id, input){
+            const x = event.key
+
+            if(x == null || x != 'Enter') return;
+            
+            axios.put(`/update/${id}`, {name: input.value})
+            .then((response) => {
+                if(response.status == 200) {
+                    this.innerHTML = templateLi(id, input.value, false)
+                }
+            })
+            .catch(function(error){
+                console.log(error)
+            })
         }
         function del(element){
             // console.log(element)
