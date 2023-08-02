@@ -41,7 +41,7 @@
             margin-left: 10px;
             width: 120px;
         }
-        .btn-danger{
+        .delete, .update{
             width: 50px;
         }
         li i{
@@ -58,16 +58,17 @@
 
             botao.addEventListener('click', create)
             lista.addEventListener('click', del)
+            lista.addEventListener('click', edit)
 
             read()
         }
 
         function templateLi(id, name){
             return `<li class="list-group-item">
-                ${name}
-                
-                <i class="btn btn-danger delete fa fa-trash" data-id="${id}"> </i>
-                `
+                    ${name}
+                    <i class="btn btn-danger  delete fa fa-trash"  data-id="${id}"> </i>
+                    <i class="btn btn-primary update fa fa-wrench" data-id="${id}"> </i>
+                    `
         }
         function read(){
             lista.innerHTML = ''
@@ -94,8 +95,18 @@
                     console.log(error)
                 })
         }
-        function edit(){
+        function edit(element){
+            if(element.target.classList.contains('update')){
+                const input = document.createElement('input')
+                input.type = 'text'
+                input.classList = 'form-control'
+                input.setAttribute('value', '')
+                const pai = element.target.parentElement
+                const id = element.target.dataset.id
 
+                pai.innerHTML = ''
+                pai.appendChild(input)
+            }
         }
         function del(element){
             // console.log(element)
