@@ -26,6 +26,15 @@ server.get('/', function (req, res, next) {
     return next()
 })
 
+server.post('/create', function (req, res, next) {
+    knex('rest')
+        .insert(req.body)
+        .then((dados) => {
+        res.send(dados);
+    }, next)
+
+})
+
 server.listen(3000, function () {
     console.log('%s listening at %s', server.name, server.url)
 })
